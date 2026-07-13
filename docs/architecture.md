@@ -253,7 +253,7 @@ erDiagram
 - Compression segmentby: `appId`, `type`
 - Compression orderby: `receivedAt DESC`
 
-## Deployment (ven-misc)
+## Deployment (deploy host)
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': {'fontSize': '17px', 'fontFamily': 'Inter, system-ui, sans-serif', 'primaryColor': '#312e81', 'primaryTextColor': '#e0e7ff', 'primaryBorderColor': '#6366f1', 'lineColor': '#a78bfa', 'edgeLabelBackground': '#1c1917'}, 'flowchart': {'nodeSpacing': 40, 'rankSpacing': 55, 'padding': 60, 'curve': 'basis'}}}%%
@@ -263,7 +263,7 @@ graph TB
         CLIENTS["Client Applications\nBrowser · Node · Go · PHP"]
     end
 
-    subgraph Server[" VEN-MISC · 18.217.9.116 "]
+    subgraph Server[" VEN-MISC · <deploy-host-ip> "]
         subgraph Nginx[" NGINX · :443 · SSL "]
             direction LR
             R1["/ingest/*"]

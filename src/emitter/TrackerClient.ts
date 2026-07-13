@@ -201,13 +201,13 @@ function buildAutoContext(flags: Required<ContextEnrichmentFields>): Partial<Tra
  * Configuration options for {@link TrackerClient}.
  *
  * Set `endpoint` to your tracker's ingest URL. Omit it entirely to fall
- * back to the public Vendidit tracker (`https://tracker.vendidit.com/ingest/events`),
+ * back to the public rw3iss tracker (`https://tracker.ryanweiss.net/ingest/events`),
  * or set `transport` for custom delivery (in-process, queued, etc.).
  *
  * @example
  * ```typescript
  * TrackerClient.init({
- *   endpoint: 'https://tracker.vendidit.com/ingest/events',
+ *   endpoint: 'https://tracker.ryanweiss.net/ingest/events',
  *   appId: 'buyer-portal',
  *   environment: 'production',
  *   minLevel: 'info',
@@ -221,7 +221,7 @@ function buildAutoContext(flags: Required<ContextEnrichmentFields>): Partial<Tra
 export interface TrackerConfig {
   /**
    * Full URL events POST to. Used as-is — no path appending. When unset
-   * or empty, defaults to `https://tracker.vendidit.com/ingest/events`
+   * or empty, defaults to `https://tracker.ryanweiss.net/ingest/events`
    * so a fresh init still ships events somewhere useful for the public
    * tracker case. Ignored when `transport` is set.
    *
@@ -501,12 +501,12 @@ const DEFAULTS = {
 
 /**
  * Fallback `endpoint` when neither `endpoint` nor `transport` is set on
- * `TrackerConfig`. Points at the public Vendidit tracker's ingest URL
+ * `TrackerConfig`. Points at the public rw3iss tracker's ingest URL
  * so a fresh `init({ appId })` works without any further config. Used
  * as-is — no path appending. Operators on a self-hosted cluster
  * override via `endpoint`.
  */
-const DEFAULT_ENDPOINT = 'https://tracker.vendidit.com/ingest/events';
+const DEFAULT_ENDPOINT = 'https://tracker.ryanweiss.net/ingest/events';
 
 /**
  * Build the per-event "should this be stamped `dedup: false`?" predicate
@@ -607,7 +607,7 @@ function passesSeverity(type: EventType, minLevel?: EventType): boolean {
  * import { TrackerClient } from '@rw3iss/tracker';
  *
  * const tracker = TrackerClient.init({
- *   endpoint: 'https://tracker.vendidit.com/ingest/events',
+ *   endpoint: 'https://tracker.ryanweiss.net/ingest/events',
  *   appId: 'my-app',
  *   environment: 'production',
  * });
@@ -647,7 +647,7 @@ export class TrackerClient {
    * @example
    * ```typescript
    * const tracker = TrackerClient.init({
-   *   endpoint: 'https://tracker.vendidit.com/ingest/events',
+   *   endpoint: 'https://tracker.ryanweiss.net/ingest/events',
    *   appId: 'buyer-portal',
    *   environment: 'production',
    * });
@@ -685,8 +685,8 @@ export class TrackerClient {
    * @param config - Tracker configuration options.
    * @remarks
    * Neither `endpoint` nor `transport` is required — when both are
-   * absent, the SDK falls back to the public Vendidit tracker's ingest
-   * URL (`https://tracker.vendidit.com/ingest/events`) so a fresh init
+   * absent, the SDK falls back to the public rw3iss tracker's ingest
+   * URL (`https://tracker.ryanweiss.net/ingest/events`) so a fresh init
    * still works for the common case.
    *
    * @see {@link TrackerConfig}
@@ -726,7 +726,7 @@ export class TrackerClient {
       this.transport.start?.();
     } else {
       // Endpoint is the FULL URL events POST to — used as-is, no path
-      // appending. When unset / empty, fall back to the public Vendidit
+      // appending. When unset / empty, fall back to the public rw3iss
       // tracker's ingest URL so a fresh `init({ appId })` still works
       // for the common case. Operators on a self-hosted cluster set
       // their own URL.

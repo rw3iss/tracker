@@ -18,7 +18,7 @@ pnpm docs             # generate API docs to docs/api/
 pnpm docs:serve       # generate + serve locally
 ```
 
-**Registry:** GitHub Packages (`@vendidit` scope). Version: `0.1.0`.
+**Registry:** npm (`@rw3iss` scope, public). Version: `0.6.0`.
 
 ## Architecture
 
@@ -49,7 +49,7 @@ TrackerService (consumer — NestJS processing engine)
 └── cli/             # CLI tool for querying events
 ```
 
-> The HTML dashboard lives in `@vendidit/tracker-server` (its
+> The HTML dashboard lives in `@rw3iss/tracker-server` (its
 > `TrackerDashboardModule`), not here. This library exposes the API
 > the dashboard reads.
 
@@ -84,7 +84,7 @@ Severity ordering: `error > warning > info > debug > event`.
 import { TrackerClient, tracker } from '@rw3iss/tracker';
 
 TrackerClient.init({
-  endpoint: 'https://tracker.vendidit.com/ingest/events',
+  endpoint: 'https://tracker.ryanweiss.net/ingest/events',
   appId: 'buyer-portal',
   environment: 'production',
   appVersion: '36.0.0',
@@ -194,7 +194,7 @@ tracker.error(new Error('Order creation failed'));
 | GET | `/api/metrics` | Prometheus metrics |
 
 Paths above use the default `ROUTE_PREFIX=api`. The dashboard
-(`GET /dashboard` by default) is served by `@vendidit/tracker-server`'s
+(`GET /dashboard` by default) is served by `@rw3iss/tracker-server`'s
 own `TrackerDashboardModule` — see that repo for `DASHBOARD_PATH` /
 `DASHBOARD_ENABLED`.
 
@@ -221,7 +221,7 @@ own `TrackerDashboardModule` — see that repo for `DASHBOARD_PATH` /
 
 - Emitter tests use `jsdom` environment, consumer tests use `node`
 - `fake-indexeddb` for IDB tests
-- `@vendidit/test-tools` for custom test utilities
+- `@rw3iss/test-tools` for custom test utilities
 - All peer deps are optional — the package works with just the emitter in any environment
 
 ## Build

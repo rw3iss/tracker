@@ -9,7 +9,7 @@ All tracker clients (TypeScript, Go, PHP, etc.) communicate with the tracker ser
 Configure the tracker server endpoint. All paths below are relative to this base.
 
 ```
-https://tracker.vendidit.com
+https://tracker.ryanweiss.net
 ```
 
 ## Authentication

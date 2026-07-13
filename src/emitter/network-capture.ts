@@ -122,7 +122,7 @@ function tryParseJson(text: string): unknown {
 
 /**
  * Pull a human-readable error message out of an HTTP body. Prefers a
- * NestJS / Vendidit-style `{ error: { message } }` or `{ message }`
+ * NestJS / rw3iss-style `{ error: { message } }` or `{ message }`
  * envelope, then falls back to the raw text (single-line, capped).
  */
 function deriveErrorMessage(parsed: unknown, rawText: string): string {

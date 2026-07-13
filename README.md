@@ -21,10 +21,10 @@ Self-hosted event and error tracking. Polyglot emitters in **TypeScript, Go, and
 
 | Link | What it covers |
 |---|---|
-| **[Docs](https://tracker.vendidit.com/docs/)** | Guided tour: architecture, deployment, SDKs, operations. Start here. |
-| **[API Contract](https://tracker.vendidit.com/docs/api/contract/)** | Language-agnostic JSON wire format every emitter speaks. |
-| **[SDK Guide](https://tracker.vendidit.com/docs/sdk/typescript/)** | TypeScript emitter API; Go and PHP guides linked from the same index. |
-| **[Config](https://tracker.vendidit.com/docs/operations/config/)** | Env vars, deduplication, storage, multi-tenant setup. |
+| **[Docs](https://tracker.ryanweiss.net/docs/)** | Guided tour: architecture, deployment, SDKs, operations. Start here. |
+| **[API Contract](https://tracker.ryanweiss.net/docs/api/contract/)** | Language-agnostic JSON wire format every emitter speaks. |
+| **[SDK Guide](https://tracker.ryanweiss.net/docs/sdk/typescript/)** | TypeScript emitter API; Go and PHP guides linked from the same index. |
+| **[Config](https://tracker.ryanweiss.net/docs/operations/config/)** | Env vars, deduplication, storage, multi-tenant setup. |
 
 ---
 
@@ -34,9 +34,9 @@ Self-hosted event and error tracking. Polyglot emitters in **TypeScript, Go, and
 |---|---|---|
 | TypeScript / JavaScript | `@rw3iss/tracker` *(this package)* | browsers · Node · NestJS |
 | Go | `github.com/rw3iss/tracker-go` | services that need a stdlib-only emitter |
-| PHP | `vendidit/tracker` (Composer) | Laravel and vanilla PHP backends |
+| PHP | `rw3iss/tracker` (Composer) | Laravel and vanilla PHP backends |
 
-All three SDKs serialize the same `TrackerEvent` JSON. Errors arrive with a uniform `{ name, message, stack?, file?, line?, code?, previous? }` shape regardless of source language — see the [API Contract](https://tracker.vendidit.com/docs/api/contract/).
+All three SDKs serialize the same `TrackerEvent` JSON. Errors arrive with a uniform `{ name, message, stack?, file?, line?, code?, previous? }` shape regardless of source language — see the [API Contract](https://tracker.ryanweiss.net/docs/api/contract/).
 
 ---
 
@@ -59,8 +59,8 @@ This package splits along the producer/receiver line. **Most apps only use the e
 | `@rw3iss/tracker/analytics` | GA-style auto-emit vocab: page views, sessions, scroll, form fields, ecommerce |
 | `@rw3iss/tracker/ga` | Google Analytics 4 integration (gtag.js / GTM) |
 | `@rw3iss/tracker/types` | Shared TS types only — no runtime |
-| [`Vendidit/tracker-go`](https://github.com/rw3iss/tracker-go) | Go emitter — same wire format, stdlib-only |
-| [`Vendidit/tracker-php`](https://github.com/rw3iss/tracker-php) | PHP emitter (Composer · Laravel auto-discovery) — same wire format |
+| [`rw3iss/tracker-go`](https://github.com/rw3iss/tracker-go) | Go emitter — same wire format, stdlib-only |
+| [`rw3iss/tracker-php`](https://github.com/rw3iss/tracker-php) | PHP emitter (Composer · Laravel auto-discovery) — same wire format |
 
 ### Consumer side — services that **receive** events
 
@@ -76,7 +76,7 @@ Two ways to receive events: a **Go ingest server** in front for high-throughput 
 | `@rw3iss/tracker/storage` | `EventStoragePlugin` + storage adapters + query helpers (Postgres, in-memory, SQS) |
 | `@rw3iss/tracker/notifications` | Multi-channel alerts: email · Slack · Discord · SMS · webhook · Firebase |
 | `@rw3iss/tracker/ga/server` | Server-side Google Analytics via Measurement Protocol |
-| [`Vendidit/tracker-ingest`](https://github.com/rw3iss/tracker-ingest) | Separate Go ingestion server — validates API keys + LPUSH to Redis ahead of the consumer (~5 MB RAM, absorbs bursts) |
+| [`rw3iss/tracker-ingest`](https://github.com/rw3iss/tracker-ingest) | Separate Go ingestion server — validates API keys + LPUSH to Redis ahead of the consumer (~5 MB RAM, absorbs bursts) |
 
 ---
 
@@ -85,7 +85,7 @@ Two ways to receive events: a **Go ingest server** in front for high-throughput 
 
 Use this side in any app you're instrumenting (browser, Node service, NestJS app, etc.). One singleton, one config, one universal API.
 
-> **Non-TypeScript services** use their own emitter package — same endpoint, same JSON shape. See [`Vendidit/tracker-go`](https://github.com/rw3iss/tracker-go) (Go, stdlib-only) and [`Vendidit/tracker-php`](https://github.com/rw3iss/tracker-php) (PHP, Composer / Laravel auto-discovery).
+> **Non-TypeScript services** use their own emitter package — same endpoint, same JSON shape. See [`rw3iss/tracker-go`](https://github.com/rw3iss/tracker-go) (Go, stdlib-only) and [`rw3iss/tracker-php`](https://github.com/rw3iss/tracker-php) (PHP, Composer / Laravel auto-discovery).
 
 ## Install
 
@@ -288,7 +288,7 @@ errorEnrichment: { file: true, line: true, code: false, previous: false }
 | code | ✓ | |
 | previous[] | ✓ | |
 
-This shape mirrors the Go and PHP SDKs — see [API contract](https://tracker.vendidit.com/docs/api/contract/).
+This shape mirrors the Go and PHP SDKs — see [API contract](https://tracker.ryanweiss.net/docs/api/contract/).
 
 **Why it matters — payload + storage savings.** `errorEnrichment` is primarily a **payload-size knob**. On a representative HTTP-handler error with a 3-deep `Error.cause` chain and a 9-line stack trace, switching from `'full'` to `'minimal'` cuts the per-event JSON from **1,454 → 793 bytes — a ~45% reduction** that compounds over wire bytes, ingest queue depth, and Postgres row size for every error stored. At 10K errors/sec that's ~6.3 MB/s less network traffic and proportional database growth slowed.
 
@@ -572,7 +572,7 @@ TrackerClient.init({
 | `'tandem'` | Run AnalyticsPlugin + GA together with shared visitor/session IDs |
 | `'forward'` | AnalyticsPlugin is canonical; events forwarded to GA via batched `gtag('event', ...)` |
 
-For server-originating events (webhooks, conversions resolved post-redirect), pair with the companion server plugin under [`@rw3iss/tracker/ga/server`](./src/ga/README.md#server-side--vendidittrackergaserver) which uses the GA4 Measurement Protocol.
+For server-originating events (webhooks, conversions resolved post-redirect), pair with the companion server plugin under [`@rw3iss/tracker/ga/server`](./src/ga/README.md#server-side--rw3isstrackergaserver) which uses the GA4 Measurement Protocol.
 
 </details>
 
@@ -740,7 +740,7 @@ interface SerializedErrorPrevious {
 }
 ```
 
-Created by `tracker.error()` from any `Error` instance and stored in `TrackerEvent.error`. The wire shape matches the Go and PHP SDKs — see [API contract docs](https://tracker.vendidit.com/docs/api/contract/) for the full cross-SDK guarantees.
+Created by `tracker.error()` from any `Error` instance and stored in `TrackerEvent.error`. The wire shape matches the Go and PHP SDKs — see [API contract docs](https://tracker.ryanweiss.net/docs/api/contract/) for the full cross-SDK guarantees.
 
 Configurable via `errorEnrichment` — see [Enrichment architecture](#enrichment-architecture) for the full value space and `benchmarks/serialize-error.bench.ts` for size/CPU measurements.
 
@@ -940,7 +940,7 @@ Use this side **only** if you're building the receiving service (typically `trac
    (postgres)
 ```
 
-> **Typical production layout:** put the Go ingest binary — [`Vendidit/tracker-ingest`](https://github.com/rw3iss/tracker-ingest) — in front of the consumer. It validates the API key and `LPUSH`es events to a Redis LIST; the NestJS consumer in this package drains that list (via `RedisIngestConsumer`), runs the pipeline, and writes to Postgres. The ingest binary stays small (~5 MB RAM) so it absorbs bursts without a Node runtime in front of the queue. The consumer can also accept events directly over HTTP — `tracker-ingest` is optional but recommended once you cross a few hundred events/sec.
+> **Typical production layout:** put the Go ingest binary — [`rw3iss/tracker-ingest`](https://github.com/rw3iss/tracker-ingest) — in front of the consumer. It validates the API key and `LPUSH`es events to a Redis LIST; the NestJS consumer in this package drains that list (via `RedisIngestConsumer`), runs the pipeline, and writes to Postgres. The ingest binary stays small (~5 MB RAM) so it absorbs bursts without a Node runtime in front of the queue. The consumer can also accept events directly over HTTP — `tracker-ingest` is optional but recommended once you cross a few hundred events/sec.
 
 ## Install
 
@@ -978,7 +978,7 @@ TrackerModule.register({
 });
 ```
 
-> The self-hosted HTML dashboard lives in `@vendidit/tracker-server`'s
+> The self-hosted HTML dashboard lives in `@rw3iss/tracker-server`'s
 > `TrackerDashboardModule` — it's not part of this library.
 
 > Without a storage plugin, events flow through the pipeline but aren't persisted — query/status endpoints return 404. Add `EventStoragePlugin` (see [`/storage`](#storage--persistence--queries) below) to enable persistence + queries.
@@ -1356,7 +1356,7 @@ await helpers.topErrorMessages({ limit: 10 });
 <summary><strong>Self-hosted dashboard (lives in <code>tracker-server</code>)</strong></summary>
 
 The HTML dashboard isn't part of this library — it ships with
-[`@vendidit/tracker-server`](https://github.com/Vendidit/tracker-server),
+[`@rw3iss/tracker-server`](https://github.com/rw3iss/tracker-server),
 mounted by `TrackerDashboardModule` at `DASHBOARD_PATH` (default
 `/dashboard`). It hits the same query API exposed here, so any
 deployment that pulls in `EventStoragePlugin` + `TrackerModule` can
@@ -1459,8 +1459,8 @@ TrackerClient (universal API)               TrackerService (engine)
 
 The same wire format is implemented in several languages — pick one per service:
 
-- Go: [`Vendidit/tracker-go`](https://github.com/rw3iss/tracker-go)
-- PHP: [`Vendidit/tracker-php`](https://github.com/rw3iss/tracker-php)
+- Go: [`rw3iss/tracker-go`](https://github.com/rw3iss/tracker-go)
+- PHP: [`rw3iss/tracker-php`](https://github.com/rw3iss/tracker-php)
 - TS: this package
 
 All conform to [`docs/API_CONTRACT.md`](./docs/API_CONTRACT.md).

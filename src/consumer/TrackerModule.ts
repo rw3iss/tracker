@@ -147,7 +147,7 @@ export interface TrackerModuleOptions {
    * TrackerModule.register({ routePrefix: 'api' });
    * ```
    *
-   * @remarks The self-hosted HTML dashboard lives in `@vendidit/tracker-server`
+   * @remarks The self-hosted HTML dashboard lives in `@rw3iss/tracker-server`
    * (see `TrackerDashboardModule` over there) — it's not part of this
    * library and isn't controlled from this options object.
    */

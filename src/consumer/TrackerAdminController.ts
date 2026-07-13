@@ -67,7 +67,7 @@ export class TrackerAdminController {
      * POST /api/admin/clear-events
      * X-Tracker-Admin-Key: …
      *
-     * { "appId": "dev-alt-vendidit", "type": "debug" }
+     * { "appId": "dev-alt-rw3iss", "type": "debug" }
      * ```
      */
     @Post('clear-events')

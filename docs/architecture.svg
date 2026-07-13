@@ -39,12 +39,12 @@
   <!-- Go -->
   <rect x="380" y="50" width="160" height="56" rx="6" class="box-emit"/>
   <text x="460" y="74" text-anchor="middle" class="label">Go</text>
-  <text x="460" y="92" text-anchor="middle" class="sub">github.com/Vendidit/tracker-go</text>
+  <text x="460" y="92" text-anchor="middle" class="sub">github.com/rw3iss/tracker-go</text>
 
   <!-- PHP -->
   <rect x="560" y="50" width="180" height="56" rx="6" class="box-emit"/>
   <text x="650" y="74" text-anchor="middle" class="label">PHP</text>
-  <text x="650" y="92" text-anchor="middle" class="sub">vendidit/tracker (Composer)</text>
+  <text x="650" y="92" text-anchor="middle" class="sub">rw3iss/tracker (Composer)</text>
 
   <!-- Arrows down to HTTP pipe -->
   <path d="M100 106 V 158" class="arr" marker-end="url(#arrow)"/>

@@ -159,7 +159,7 @@ interface ChannelConfigMap {
 interface EmailChannelConfig {
   adapter: IEmailAdapter;
   recipients: string[];
-  from: string;                          // e.g. 'support@vendidit.com'
+  from: string;                          // e.g. 'support@ryanweiss.net'
   formatter?: EmailFormatter;            // optional custom formatter
 }
 
@@ -477,16 +477,16 @@ function resolveOmitFromFailedEvent(event: StoredTrackerEvent): ChannelType[]
 
 ---
 
-## Part 9 — Default Vendidit Configuration (`./new/api`)
+## Part 9 — Default rw3iss Configuration (`./new/api`)
 
 The `./new/api` TrackerModule registration should include the notifications plugin configured with:
 
 - **Strategy:** `NotifyOnErrorsStrategy`
 - **Email channel:** `SmtpAdapter` with SendGrid SMTP relay credentials
   - `host: 'smtp.sendgrid.net'`, `port: 587`, `auth: { user: 'apikey', pass: process.env.SENDGRID_API_KEY }`
-  - `recipients: ['ryan@vendidit.com']`
-  - `from: 'support@vendidit.com'`
-- **appId:** matches the api's tracker appId (e.g. `'vendidit-api'`)
+  - `recipients: ['rw3iss@gmail.com']`
+  - `from: 'support@ryanweiss.net'`
+- **appId:** matches the api's tracker appId (e.g. `'rw3iss-api'`)
 - **Deduplication:** 60 seconds (suppress duplicate notification for the same event+channel)
 - **unsentStorage:** wired to a TypeORM repo for `UnsentNotificationEntity`
 
@@ -590,7 +590,7 @@ A thorough `NOTIFICATIONS.md` (or section in the main README) is generated as pa
 - `notify()` include/omit override usage
 - Loop prevention explanation
 - Unsent notification storage setup
-- Full `./new/api` Vendidit default config example
+- Full `./new/api` rw3iss default config example
 - Environment variable reference
 
 ---
@@ -600,5 +600,5 @@ A thorough `NOTIFICATIONS.md` (or section in the main README) is generated as pa
 - The core `TrackerModule` gains no runtime dependency on `@rw3iss/tracker/notifications`. The plugin array is typed as `ITrackerPlugin[]` — a plain interface.
 - The notifications module has no NestJS module/DI of its own. It is a plugin object, not a NestJS module.
 - No retry scheduler — failed notifications land in `tracker_unsent_notifications` for external tooling or a future retry job. A retry runner is out of scope for this spec.
-- SMS (Twilio) and Firebase adapters are fully implemented but the Vendidit default config does not enable them — they require additional env setup.
+- SMS (Twilio) and Firebase adapters are fully implemented but the rw3iss default config does not enable them — they require additional env setup.
 - All third-party API adapter implementations make real HTTP calls; no mock/stub implementations are included in this spec.

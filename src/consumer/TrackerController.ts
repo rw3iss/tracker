@@ -101,7 +101,7 @@ function extractIp(req: // eslint-disable-next-line @typescript-eslint/no-explic
  * | PATCH | `/events/:id/status` | Update event lifecycle status |
  * | GET | `/metrics` | Prometheus metrics |
  *
- * The self-hosted HTML dashboard is served by `@vendidit/tracker-server`'s
+ * The self-hosted HTML dashboard is served by `@rw3iss/tracker-server`'s
  * own `TrackerDashboardController` — it's not part of this library.
  *
  * @remarks
@@ -544,7 +544,7 @@ export class TrackerController {
     resRaw.end(body);
   }
 
-  // The self-hosted HTML dashboard is served by `@vendidit/tracker-server`'s
+  // The self-hosted HTML dashboard is served by `@rw3iss/tracker-server`'s
   // `TrackerDashboardController`, mounted at its own path independently
   // of `routePrefix`. It's intentionally not part of this library.
 }

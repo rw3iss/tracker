@@ -47,7 +47,7 @@ describe('TrackerClient', () => {
     tracker.capture({ type: 'info', message: 'hello' });
     await tracker.flush();
     const calledUrl = fetchMock.mock.calls[0]?.[0];
-    expect(calledUrl).toBe('https://tracker.vendidit.com/ingest/events');
+    expect(calledUrl).toBe('https://tracker.ryanweiss.net/ingest/events');
   });
 
   it('init() with empty-string endpoint also falls back to the default', async () => {
@@ -60,7 +60,7 @@ describe('TrackerClient', () => {
     } as any);
     tracker.capture({ type: 'info', message: 'hello' });
     await tracker.flush();
-    expect(fetchMock.mock.calls[0]?.[0]).toBe('https://tracker.vendidit.com/ingest/events');
+    expect(fetchMock.mock.calls[0]?.[0]).toBe('https://tracker.ryanweiss.net/ingest/events');
   });
 
   it('capture() auto-stamps timestamp and appId', async () => {

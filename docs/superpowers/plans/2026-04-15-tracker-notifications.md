@@ -2917,7 +2917,7 @@ TrackerNotificationsPlugin.create({
 
 ---
 
-## Vendidit API Default Configuration
+## rw3iss API Default Configuration
 
 The `./new/api` tracker registration uses:
 
@@ -2935,7 +2935,7 @@ TrackerModule.register({
   storage: new TypeOrmTrackerStorage(dataSource.getRepository(TrackerEventEntity)),
   plugins: [
     TrackerNotificationsPlugin.create({
-      appId: 'vendidit-api',
+      appId: 'rw3iss-api',
       strategies: [new NotifyOnErrorsStrategy()],
       channels: {
         email: {
@@ -2945,8 +2945,8 @@ TrackerModule.register({
             secure: false,
             auth:   { user: 'apikey', pass: process.env.SENDGRID_API_KEY! },
           }),
-          recipients: ['ryan@vendidit.com'],
-          from:       'support@vendidit.com',
+          recipients: ['rw3iss@gmail.com'],
+          from:       'support@ryanweiss.net',
         },
       },
       deduplication: { windowMs: 60_000 },
