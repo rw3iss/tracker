@@ -11,9 +11,6 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -24,36 +21,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          registry-url: 'https://npm.pkg.github.com'
+          registry-url: 'https://registry.npmjs.org'
           scope: '@rw3iss'
           cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: pnpm build
 
-      # Use the cross-repo PAT for publishing — the auto GITHUB_TOKEN's
-      # `packages: write` only covers packages owned by this repo, but
-      # @rw3iss/tracker was originally connected to a different repo.
-      # GH_PACKAGES_TOKEN is the same secret tracker-server's deploy
-      # workflow uses to install from GitHub Packages.
-      #
-      # setup-node sets NPM_CONFIG_USERCONFIG=$RUNNER_TEMP/.npmrc, which
-      # overrides project-local .npmrc. Write the auth token directly
-      # into that file (token literal — substitution from NODE_AUTH_TOKEN
-      # has been flaky for nested cwd) before publish.
+      # Publishes to the public npm registry. Add an `NPM_TOKEN` repo secret
+      # (an npm automation token with publish rights on the @rw3iss scope).
+      # publishConfig in package.json already sets access: public.
       - name: Publish
-        run: |
-          npmrc_path="${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}"
-          cat > "$npmrc_path" <<EOF
-          @rw3iss:registry=https://npm.pkg.github.com
-          //npm.pkg.github.com/:_authToken=${PACKAGES_TOKEN}
-          always-auth=true
-          EOF
-          npm publish
+        run: npm publish
         env:
-          PACKAGES_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
