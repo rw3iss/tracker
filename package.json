@@ -1,0 +1,190 @@
+{
+  "name": "@rw3iss/tracker",
+  "version": "0.6.0",
+  "description": "Universal event and error tracking library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rw3iss/tracker.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "main": "./dist/emitter/index.js",
+  "module": "./dist/emitter/index.mjs",
+  "types": "./dist/emitter/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "CLAUDE.md",
+    "LICENSE"
+  ],
+  "typesVersions": {
+    "*": {
+      "emitter": [
+        "./dist/emitter/index.d.ts"
+      ],
+      "consumer": [
+        "./dist/consumer/index.d.ts"
+      ],
+      "storage": [
+        "./dist/consumer/storage/index.d.ts"
+      ],
+      "notifications": [
+        "./dist/consumer/notifications/index.d.ts"
+      ],
+      "breadcrumbs": [
+        "./dist/emitter/plugins/index.d.ts"
+      ],
+      "sw": [
+        "./dist/sw/index.d.ts"
+      ],
+      "types": [
+        "./dist/common/index.d.ts"
+      ],
+      "analytics": [
+        "./dist/analytics/index.d.ts"
+      ],
+      "ga": [
+        "./dist/ga/index.d.ts"
+      ],
+      "ga/server": [
+        "./dist/ga/server/index.d.ts"
+      ]
+    }
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/emitter/index.d.ts",
+      "import": "./dist/emitter/index.mjs",
+      "require": "./dist/emitter/index.js"
+    },
+    "./emitter": {
+      "types": "./dist/emitter/index.d.ts",
+      "import": "./dist/emitter/index.mjs",
+      "require": "./dist/emitter/index.js"
+    },
+    "./consumer": {
+      "types": "./dist/consumer/index.d.ts",
+      "import": "./dist/consumer/index.mjs",
+      "require": "./dist/consumer/index.js"
+    },
+    "./storage": {
+      "types": "./dist/consumer/storage/index.d.ts",
+      "import": "./dist/consumer/storage/index.mjs",
+      "require": "./dist/consumer/storage/index.js"
+    },
+    "./notifications": {
+      "types": "./dist/consumer/notifications/index.d.ts",
+      "import": "./dist/consumer/notifications/index.mjs",
+      "require": "./dist/consumer/notifications/index.js"
+    },
+    "./breadcrumbs": {
+      "types": "./dist/emitter/plugins/index.d.ts",
+      "import": "./dist/emitter/plugins/index.mjs",
+      "require": "./dist/emitter/plugins/index.js"
+    },
+    "./sw": {
+      "types": "./dist/sw/index.d.ts",
+      "import": "./dist/sw/index.mjs",
+      "require": "./dist/sw/index.js"
+    },
+    "./types": {
+      "types": "./dist/common/index.d.ts",
+      "import": "./dist/common/index.mjs",
+      "require": "./dist/common/index.js"
+    },
+    "./analytics": {
+      "types": "./dist/analytics/index.d.ts",
+      "import": "./dist/analytics/index.mjs",
+      "require": "./dist/analytics/index.js"
+    },
+    "./ga": {
+      "types": "./dist/ga/index.d.ts",
+      "import": "./dist/ga/index.mjs",
+      "require": "./dist/ga/index.js"
+    },
+    "./ga/server": {
+      "types": "./dist/ga/server/index.d.ts",
+      "import": "./dist/ga/server/index.mjs",
+      "require": "./dist/ga/server/index.js"
+    }
+  },
+  "scripts": {
+    "prepare": "tsup",
+    "build": "tsup",
+    "cli": "node dist/cli/tracker-cli.js",
+    "test": "jest --forceExit",
+    "test:watch": "jest --watch",
+    "bench": "jest --roots='<rootDir>/benchmarks' --testMatch='<rootDir>/benchmarks/**/*.bench.ts' --forceExit",
+    "typecheck": "tsc --noEmit",
+    "docs": "typedoc",
+    "docs:watch": "typedoc --watch",
+    "docs:serve": "typedoc && npx serve docs/api"
+  },
+  "bin": {
+    "tracker-cli": "./dist/cli/tracker-cli.js"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^11.1.19",
+    "@nestjs/core": "^11.1.19",
+    "@nestjs/websockets": "^11.0.0",
+    "@swc/core": "^1.15.30",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@types/nodemailer": "^8.0.0",
+    "@types/ws": "^8.18.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "fake-indexeddb": "^6.2.5",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "reflect-metadata": "^0.2.2",
+    "ts-jest": "^29.2.0",
+    "tsup": "^8.0.0",
+    "typedoc": "^0.28.19",
+    "typedoc-plugin-markdown": "^4.11.0",
+    "typeorm": "^0.3.28",
+    "typescript": "^5.5.0",
+    "ws": "^8.20.0"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">=10",
+    "@nestjs/core": ">=10",
+    "@nestjs/websockets": ">=10",
+    "class-transformer": ">=0.5",
+    "class-validator": ">=0.14",
+    "firebase-admin": ">=12",
+    "typeorm": ">=0.3"
+  },
+  "peerDependenciesMeta": {
+    "@nestjs/common": {
+      "optional": true
+    },
+    "@nestjs/core": {
+      "optional": true
+    },
+    "@nestjs/websockets": {
+      "optional": true
+    },
+    "class-transformer": {
+      "optional": true
+    },
+    "class-validator": {
+      "optional": true
+    },
+    "typeorm": {
+      "optional": true
+    },
+    "nodemailer": {
+      "optional": true
+    },
+    "firebase-admin": {
+      "optional": true
+    }
+  },
+  "optionalDependencies": {
+    "nodemailer": "^8.0.5"
+  }
+}

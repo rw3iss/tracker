@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 720" width="800" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="13">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#888"/>
+    </marker>
+    <style>
+      .box       { fill: #fafafa; stroke: #888; stroke-width: 1.2; }
+      .box-emit  { fill: #f4f4f9; stroke: #888; stroke-width: 1.2; }
+      .box-mid   { fill: #f0f4f7; stroke: #888; stroke-width: 1.2; }
+      .box-srv   { fill: #f4f7f0; stroke: #888; stroke-width: 1.2; }
+      .pill      { fill: #fafafa; stroke: #888; stroke-width: 1.2; }
+      .label     { fill: #222; }
+      .sub       { fill: #555; font-size: 11px; }
+      .arr       { stroke: #888; stroke-width: 1.4; fill: none; }
+      .dash      { stroke: #888; stroke-width: 1.4; fill: none; stroke-dasharray: 4 4; }
+      .heading   { fill: #333; font-weight: 600; font-size: 12px; letter-spacing: 0.5px; }
+      @media (prefers-color-scheme: dark) {
+        .box, .box-emit, .box-mid, .box-srv, .pill { fill: #1c1f24; stroke: #888; }
+        .label    { fill: #ddd; }
+        .sub      { fill: #aaa; }
+        .heading  { fill: #ccc; }
+      }
+    </style>
+  </defs>
+
+  <!-- ─── Section: Emitters ─── -->
+  <text x="20" y="30" class="heading">EMITTERS · produce events</text>
+
+  <!-- TS Browser -->
+  <rect x="20"  y="50" width="160" height="56" rx="6" class="box-emit"/>
+  <text x="100" y="74" text-anchor="middle" class="label">TypeScript</text>
+  <text x="100" y="92" text-anchor="middle" class="sub">browser · @rw3iss/tracker</text>
+
+  <!-- TS Node -->
+  <rect x="200" y="50" width="160" height="56" rx="6" class="box-emit"/>
+  <text x="280" y="74" text-anchor="middle" class="label">TypeScript</text>
+  <text x="280" y="92" text-anchor="middle" class="sub">node · @rw3iss/tracker</text>
+
+  <!-- Go -->
+  <rect x="380" y="50" width="160" height="56" rx="6" class="box-emit"/>
+  <text x="460" y="74" text-anchor="middle" class="label">Go</text>
+  <text x="460" y="92" text-anchor="middle" class="sub">github.com/Vendidit/tracker-go</text>
+
+  <!-- PHP -->
+  <rect x="560" y="50" width="180" height="56" rx="6" class="box-emit"/>
+  <text x="650" y="74" text-anchor="middle" class="label">PHP</text>
+  <text x="650" y="92" text-anchor="middle" class="sub">vendidit/tracker (Composer)</text>
+
+  <!-- Arrows down to HTTP pipe -->
+  <path d="M100 106 V 158" class="arr" marker-end="url(#arrow)"/>
+  <path d="M280 106 V 158" class="arr" marker-end="url(#arrow)"/>
+  <path d="M460 106 V 158" class="arr" marker-end="url(#arrow)"/>
+  <path d="M650 106 V 158" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- HTTP pipe pill -->
+  <rect x="80" y="160" width="600" height="40" rx="20" class="pill"/>
+  <text x="380" y="184" text-anchor="middle" class="label">HTTPS · POST /ingest/events  ·  shared JSON wire format</text>
+
+  <!-- Arrow down -->
+  <path d="M380 200 V 240" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- Ingest box -->
+  <text x="20" y="240" class="heading">INGEST · absorb bursts (Go, ~5 MB RAM)</text>
+  <rect x="200" y="252" width="360" height="60" rx="6" class="box-mid"/>
+  <text x="380" y="276" text-anchor="middle" class="label">tracker-ingest</text>
+  <text x="380" y="296" text-anchor="middle" class="sub">validate API key · LPUSH → redis list</text>
+
+  <!-- Arrow down to redis pill -->
+  <path d="M380 312 V 348" class="arr" marker-end="url(#arrow)"/>
+  <rect x="290" y="350" width="180" height="32" rx="16" class="pill"/>
+  <text x="380" y="370" text-anchor="middle" class="sub">redis list  ·  tracker:ingest</text>
+
+  <!-- Arrow down to consumer -->
+  <path d="M380 382 V 422" class="arr" marker-end="url(#arrow)"/>
+
+  <!-- Consumer cluster -->
+  <text x="20" y="422" class="heading">CONSUMER · process + serve (TypeScript / NestJS)</text>
+  <rect x="80" y="434" width="600" height="156" rx="6" class="box-srv"/>
+  <text x="380" y="458" text-anchor="middle" class="label">tracker-server  ·  built on @rw3iss/tracker/consumer</text>
+
+  <!-- Inner sub-boxes for the three consumer roles -->
+  <rect x="100" y="478" width="170" height="92" rx="4" class="box"/>
+  <text x="185" y="500" text-anchor="middle" class="label">pipeline</text>
+  <text x="185" y="520" text-anchor="middle" class="sub">enrichers</text>
+  <text x="185" y="538" text-anchor="middle" class="sub">deduplication</text>
+  <text x="185" y="556" text-anchor="middle" class="sub">notifications</text>
+
+  <rect x="295" y="478" width="170" height="92" rx="4" class="box"/>
+  <text x="380" y="500" text-anchor="middle" class="label">storage</text>
+  <text x="380" y="520" text-anchor="middle" class="sub">postgres + jsonb</text>
+  <text x="380" y="538" text-anchor="middle" class="sub">timescale optional</text>
+  <text x="380" y="556" text-anchor="middle" class="sub">trgm message search</text>
+
+  <rect x="490" y="478" width="170" height="92" rx="4" class="box"/>
+  <text x="575" y="500" text-anchor="middle" class="label">surface</text>
+  <text x="575" y="520" text-anchor="middle" class="sub">query API · SSE</text>
+  <text x="575" y="538" text-anchor="middle" class="sub">self-hosted dashboard</text>
+  <text x="575" y="556" text-anchor="middle" class="sub">prometheus metrics</text>
+
+  <!-- Arrow down to Postgres pill -->
+  <path d="M380 590 V 626" class="arr" marker-end="url(#arrow)"/>
+  <rect x="290" y="628" width="180" height="32" rx="16" class="pill"/>
+  <text x="380" y="648" text-anchor="middle" class="sub">postgres  ·  tracker_events</text>
+
+  <!-- DirectTransport side-channel: Node emitter into consumer in-process.
+       Curve sweeps wide to the left so the label callout has room to sit
+       beside the bend without overlapping any of the main boxes. -->
+  <path d="M280 106 C 220 200, 30 360, 80 510" class="dash" marker-end="url(#arrow)"/>
+
+  <!-- Horizontal callout for the dashed path (was a rotated label that
+       overlapped the TypeScript box and the INGEST heading). -->
+  <g>
+    <rect x="6" y="282" width="118" height="42" rx="4" class="box"/>
+    <text x="65" y="300" text-anchor="middle" class="label" font-size="12">DirectTransport</text>
+    <text x="65" y="316" text-anchor="middle" class="sub">in-process · no HTTP</text>
+  </g>
+
+  <!-- Bypass path: HTTPS POST pill → tracker-server directly, skipping
+       the Go ingest binary + redis list entirely. Dashed because it's
+       the alternate (simpler) route — recommended deployment is via
+       tracker-ingest for burst absorption, but small / single-app
+       deployments can go straight at the consumer. -->
+  <path d="M680 200 C 770 230, 770 430, 680 460" class="dash" marker-end="url(#arrow)"/>
+
+  <!-- Callout for the bypass path -->
+  <g>
+    <rect x="638" y="296" width="156" height="42" rx="4" class="box"/>
+    <text x="716" y="314" text-anchor="middle" class="label" font-size="12">Bypass</text>
+    <text x="716" y="330" text-anchor="middle" class="sub">direct HTTP · no Go ingest</text>
+  </g>
+
+  <!-- Footnote -->
+  <text x="20" y="690" class="sub">tracker-ingest (Go) is optional. Emitters can post directly to tracker-server when the deployment is small or behind one app — the wire format is identical.</text>
+  <text x="20" y="708" class="sub">Node services hosting their own consumer skip HTTP entirely (DirectTransport). Browser apps always go through HTTPS.</text>
+</svg>

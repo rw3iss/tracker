@@ -1,0 +1,56 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/common/index.ts",
+    "src/emitter/index.ts",
+    "src/consumer/index.ts",
+    "src/consumer/storage/index.ts",
+    "src/consumer/notifications/index.ts",
+    "src/emitter/plugins/index.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "out": "docs/api",
+  "name": "@rw3iss/tracker — API Reference",
+  "readme": "none",
+  "includeVersion": true,
+  "categorizeByGroup": true,
+  "categoryOrder": [
+    "Emitter",
+    "Consumer",
+    "Storage",
+    "Notifications",
+    "Types",
+    "Plugins",
+    "*"
+  ],
+  "sort": ["source-order", "alphabetical"],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "skipErrorChecking": true,
+  "navigation": {
+    "includeCategories": true,
+    "includeGroups": true
+  },
+  "visibilityFilters": {
+    "protected": false,
+    "private": false,
+    "@internal": false
+  },
+  "searchInComments": true,
+  "cleanOutputDir": true,
+  "customCss": "docs/theme.css",
+  "customJs": "docs/theme.js",
+  "externalSymbolLinkMappings": {
+    "@rw3iss/tracker": {
+      "RetryOptions": "/classes/emitter.TrackerFlusher.html",
+      "TrackEventDto": "/classes/consumer.TrackerController.html",
+      "TrackerQueueOptions": "/interfaces/emitter.TrackerConfig.html",
+      "UpdateStatusDto": "/classes/consumer.TrackerController.html",
+      "RedisLike": "/classes/consumer.RedisDeduplicationCache.html",
+      "IEmailAdapter": "/modules/consumer_notifications.html",
+      "name": "#"
+    }
+  }
+}

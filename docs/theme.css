@@ -1,0 +1,424 @@
+/* ──────────────────────────────────────────────────────────────────────────────
+   @rw3iss/tracker — Elegant API Documentation Theme
+   Full-width, spacious, boutique aesthetic
+   ────────────────────────────────────────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --light-color-background:           #fafaf9;
+  --light-color-background-secondary: #f5f5f4;
+  --light-color-text:                 #292524;
+  --light-color-text-aside:           #78716c;
+  --light-color-link:                 #4f46e5;
+  --light-color-ts-interface:         #4f46e5;
+  --light-color-ts-class:             #0f766e;
+  --light-color-ts-function:          #7c3aed;
+  --light-color-ts-enum:              #b45309;
+  --light-color-ts-type-alias:        #be185d;
+  --light-color-ts-variable:          #1d4ed8;
+  --light-color-ts-property:          #44403c;
+  --light-color-ts-method:            #4f46e5;
+  --light-color-accent:               #4f46e5;
+
+  --dark-color-background:            #1c1917;
+  --dark-color-background-secondary:  #292524;
+  --dark-color-text:                  #e7e5e4;
+  --dark-color-text-aside:            #a8a29e;
+  --dark-color-link:                  #818cf8;
+  --dark-color-ts-interface:          #818cf8;
+  --dark-color-ts-class:              #2dd4bf;
+  --dark-color-ts-function:           #a78bfa;
+  --dark-color-ts-enum:               #fbbf24;
+  --dark-color-ts-type-alias:         #f472b6;
+  --dark-color-ts-variable:           #60a5fa;
+  --dark-color-ts-property:           #d6d3d1;
+  --dark-color-ts-method:             #818cf8;
+  --dark-color-accent:                #818cf8;
+}
+
+/* ── Global typography ──────────────────────────────────────────────────────── */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+code, pre, .tsd-signature {
+  font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace !important;
+}
+
+/* ── Layout — 80% width, 1200px min, 1800px max ────────────────────────────── */
+.container {
+  max-width: min(80%, 1800px) !important;
+  min-width: min(1200px, 100vw) !important;
+  margin: 0 auto !important;
+}
+
+.container-main {
+  padding: 1.5rem 2.5rem !important;
+}
+
+/* Sidebar — generous width so names aren't truncated */
+.site-menu {
+  width: 380px !important;
+  min-width: 380px !important;
+  padding: 2rem 1.25rem 2rem 2rem !important;
+}
+
+.col-sidebar {
+  width: 380px !important;
+  min-width: 380px !important;
+}
+
+/* Main content — fill remaining space */
+.col-content {
+  max-width: none !important;
+  padding: 0 2rem !important;
+}
+
+/* ── Header — clean bar ─────────────────────────────────────────────────────── */
+header.tsd-page-toolbar {
+  border-bottom: 1px solid rgba(120, 113, 108, 0.12);
+  box-shadow: none !important;
+  padding: 0.5rem 2rem;
+}
+
+header .title {
+  font-weight: 500;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+/* ── Navigation — aligned icons + text ──────────────────────────────────────── */
+.tsd-navigation a {
+  font-size: 0.85rem;
+  font-weight: 400;
+  padding: 0.3rem 0.75rem;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: unset !important;
+}
+
+.tsd-navigation a:hover {
+  background: rgba(79, 70, 229, 0.06);
+}
+
+.tsd-navigation a.current {
+  font-weight: 500;
+  background: rgba(79, 70, 229, 0.1);
+}
+
+/* Section headers (CLASSES, INTERFACES, etc.) */
+.tsd-navigation .tsd-accordion-summary {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-aside);
+  padding: 0.75rem 0.75rem 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Sidebar section spacing */
+.tsd-navigation > ul > li {
+  margin-bottom: 0.15rem;
+}
+
+/* Indent items under their section headers.
+   Each nesting level re-applies these rules, so indentation compounds. */
+.tsd-navigation .tsd-nested-navigation {
+  margin-left: 0.75rem;
+  padding-left: 1.25rem;
+  border-left: 1px solid rgba(120, 113, 108, 0.12);
+}
+
+/* Default icon size — used by section summaries (MODULES, CLASSES, etc.) */
+.tsd-navigation .tsd-kind-icon {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Leaf items (inside nested lists): smaller icons, tighter to text,
+   nudged right so they sit past the parent section's folder icon column. */
+.tsd-navigation .tsd-nested-navigation a {
+  gap: 0.4rem;
+  padding-left: 1.1rem;
+}
+
+.tsd-navigation .tsd-nested-navigation a .tsd-kind-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+/* ── Page headings ──────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5 {
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(120, 113, 108, 0.1);
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin-top: 1.5rem;
+}
+
+/* ── Panels — tighter vertical padding ──────────────────────────────────────── */
+.tsd-panel {
+  border: 1px solid rgba(120, 113, 108, 0.1);
+  border-radius: 14px;
+  padding: 1rem 1.5rem;
+  margin: 0.75rem 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02);
+}
+
+.tsd-panel:hover {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.tsd-panel-group {
+  margin: 1rem 0;
+}
+
+/* Section headers with collapse arrows (Methods, Properties, etc.) */
+.tsd-panel-group > .tsd-accordion-summary,
+details > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Reduce space above first panel in a section */
+.tsd-panel-group > .tsd-accordion-summary + .tsd-panel,
+details > summary + section > .tsd-panel:first-child,
+details > summary + .tsd-panel {
+  margin-top: 0.5rem;
+}
+
+/* Member sections inside panels — less top padding */
+section.tsd-panel {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+/* ── Signatures ─────────────────────────────────────────────────────────────── */
+.tsd-signature {
+  background: var(--color-background-secondary);
+  border: 1px solid rgba(120, 113, 108, 0.08);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* ── Code blocks ────────────────────────────────────────────────────────────── */
+pre {
+  background: var(--color-background-secondary) !important;
+  border: 1px solid rgba(120, 113, 108, 0.08);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+
+code:not(pre code) {
+  background: rgba(79, 70, 229, 0.07);
+  border-radius: 5px;
+  padding: 0.2em 0.45em;
+  font-size: 0.85em;
+}
+
+/* ── Tables ─────────────────────────────────────────────────────────────────── */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.25rem 0;
+}
+
+th {
+  font-weight: 500;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-aside);
+  border-bottom: 2px solid rgba(120, 113, 108, 0.12);
+  padding: 0.85rem 1.25rem;
+  text-align: left;
+}
+
+td {
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid rgba(120, 113, 108, 0.06);
+  font-size: 0.9rem;
+}
+
+/* ── Parameters ─────────────────────────────────────────────────────────────── */
+.tsd-parameters {
+  padding-left: 0;
+}
+
+.tsd-parameter-list > li {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(120, 113, 108, 0.06);
+}
+
+.tsd-parameter-list > li:last-child {
+  border-bottom: none;
+}
+
+/* ── Search ─────────────────────────────────────────────────────────────────── */
+#tsd-search input {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  border-radius: 10px;
+  border: 1px solid rgba(120, 113, 108, 0.15);
+  padding: 0.6rem 1.25rem;
+}
+
+#tsd-search input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  outline: none;
+}
+
+/* ── Breadcrumbs ────────────────────────────────────────────────────────────── */
+.tsd-breadcrumb {
+  font-size: 0.8rem;
+  color: var(--color-text-aside);
+  margin-bottom: 2rem;
+}
+
+/* ── Tag groups (@remarks, @example) ────────────────────────────────────────── */
+.tsd-comment .tsd-tag-group h4 {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-aside);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Links ──────────────────────────────────────────────────────────────────── */
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid rgba(120, 113, 108, 0.08);
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--color-text-aside);
+}
+
+/* ── "On This Page" + Settings — right sidebar ─────────────────────────────── */
+.page-menu {
+  padding: 1.5rem 1.25rem;
+}
+
+.page-menu .tsd-accordion-summary {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Settings header — align arrow + text */
+.page-menu details > summary,
+.page-menu .tsd-accordion-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.page-menu details > summary svg,
+.page-menu .tsd-accordion-summary svg {
+  flex-shrink: 0;
+}
+
+/* Right sidebar links — align icons */
+.page-menu a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0;
+}
+
+/* Settings panel */
+.tsd-filter-visibility {
+  padding: 0.75rem;
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(120, 113, 108, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 113, 108, 0.25);
+}
+
+/* ── Mobile responsive ──────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .container-main {
+    padding: 1.5rem 1rem !important;
+  }
+
+  .col-content {
+    padding: 0 0.5rem !important;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  .tsd-panel {
+    padding: 1.25rem;
+  }
+}
